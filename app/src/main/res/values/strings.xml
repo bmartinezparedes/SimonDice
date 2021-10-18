@@ -1,3 +1,8 @@
 <resources>
-    <string name="app_name">Simon Dice</string>
+    <string name="tituloJuego">Simon Dice</string>
+    <string name="bJugar">Jugar</string>
+    <string name="bAmarillo">Amarillo</string>
+    <string name="bAzul">Azul</string>
+    <string name="bVerde">Verde</string>
+    <string name="bRojo">Rojo</string>
 </resources>
