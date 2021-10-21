@@ -22,6 +22,7 @@ class MainActivity : AppCompatActivity() {
 
 
     }
+
     private fun mostrarRoonda(){
         Log.i("Estado","Mostrar Numero de Rondas")
     }
