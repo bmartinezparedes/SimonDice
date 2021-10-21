@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
+import android.widget.TextView
 import com.google.android.material.bottomappbar.BottomAppBar
 
 class MainActivity : AppCompatActivity() {
@@ -16,15 +17,19 @@ class MainActivity : AppCompatActivity() {
         empezarPartida.setOnClickListener {
             //Aqui iria lo que ejecutaria darle empezar a partida
             Log.i("Estado","Boton Jugar pulsado")
-            mostrarRoonda()
+            var contador=1
+            mostrarRoonda(contador)
             ejecutarSecuencia()
         }
 
 
     }
 
-    private fun mostrarRoonda(){
+    private fun mostrarRoonda(contador:Int){
         Log.i("Estado","Mostrar Numero de Rondas")
+        val t:TextView=findViewById(R.id.numeroRonda)
+        t.setText("Ronda: "+contador.toString())
+
     }
     private fun ejecutarSecuencia(){
         Log.i("Estado","Se ejecuta el juego")
