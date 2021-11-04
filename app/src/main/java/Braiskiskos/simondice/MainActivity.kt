@@ -23,14 +23,13 @@ class MainActivity : AppCompatActivity() {
             //Aqui iria lo que ejecutaria darle empezar a partida
             Log.i("Estado","Boton Jugar pulsado")
 
-                mostrarRonda()
-                //creo la variable job para despues poder pausar la corrutina o pararla
-                val job = GlobalScope.launch(Dispatchers.Main) {
-                    //llamo al metodo ejecutar Secuencia para que me ejecute el juego
-                    ejecutarSecuencia()
-                    mensajeUsuario(1)
-                }
-
+            mostrarRonda()
+            //creo la variable job para despues poder pausar la corrutina o pararla
+            GlobalScope.launch(Dispatchers.Main) {
+                //llamo al metodo ejecutar Secuencia para que me ejecute el juego
+                ejecutarSecuencia()
+                mensajeUsuario(2)
+            }
         }
     }
 
@@ -46,19 +45,24 @@ class MainActivity : AppCompatActivity() {
         Log.i("Estado","Fin metodo mostrar ronda")
     }
     suspend fun ejecutarSecuencia(){
+        mensajeUsuario(1)
         /*con lo del log voy comprobando */
         Log.i("Estado","Se ejecuta el juego")
         delay(3000L)
         Log.i("Estado","Despues de delay")
         //hace secuencia
-        Toast.makeText(applicationContext, "Ronda en marcha", Toast.LENGTH_SHORT).show()
-        for(s in secuencia)
-            Log.i("Juego",s.toString())
-        //secuencia usuario
 
+
+        //secuencia usuario
     }
     private fun mensajeUsuario(key:Int){
         Log.i("Estado","Mensaje por toast al usuario")
+        val mensaje =when{
+            key==1->"Ronda en marcha"
+            key==2->"Tu turno"
+            else ->""
+        }
+        Toast.makeText(this.applicationContext, mensaje, Toast.LENGTH_SHORT).show()
     }
     private fun comprobarSecuencia():Boolean{
         Log.i("Estado","Comprobar que la secuencia del jugador coincide")
