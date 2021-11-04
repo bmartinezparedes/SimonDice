@@ -1,5 +1,6 @@
 package Braiskiskos.simondice
 
+import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -51,7 +52,23 @@ class MainActivity : AppCompatActivity() {
         delay(3000L)
         Log.i("Estado","Despues de delay")
         //hace secuencia
+        for (b in secuencia){
+            when{
+                b==1->{val bVerde: Button = findViewById(R.id.bVerde)
+                    bVerde.setBackgroundColor(Color.parseColor("#0E5005"))
+                }
+                b==2->{val bRojo: Button = findViewById(R.id.bRojo)
+                    bRojo.setBackgroundColor(Color.parseColor("#FF0400"))
+                }
+                b==3->{val bAmarillo: Button = findViewById(R.id.bAmarillo)
+                    bAmarillo.setBackgroundColor(Color.parseColor("#F4FF00"))
+                }
+                b==4->{val bAzul: Button = findViewById(R.id.bAzul)
+                    bAzul.setBackgroundColor(Color.parseColor("#0016FF"))
+                }
+            }
 
+        }
 
         //secuencia usuario
     }
