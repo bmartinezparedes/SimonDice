@@ -16,6 +16,10 @@ import kotlin.random.Random
 class MainActivity : AppCompatActivity() {
     private var contadorRondas:Int=0
     var secuencia= arrayOf<Int>()
+    var secuenciaComprobar=arrayOf<Int>()
+    var primerMostrar=true
+    private var contadorSecuencia:Int=0
+    var compo=true
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -23,14 +27,40 @@ class MainActivity : AppCompatActivity() {
         empezarPartida.setOnClickListener {
             //Aqui iria lo que ejecutaria darle empezar a partida
             Log.i("Estado","Boton Jugar pulsado")
-
-            mostrarRonda()
+            if(primerMostrar){
+                mostrarRonda()
+                primerMostrar=false
+            }
             //creo la variable job para despues poder pausar la corrutina o pararla
             GlobalScope.launch(Dispatchers.Main) {
                 //llamo al metodo ejecutar Secuencia para que me ejecute el juego
                 ejecutarSecuencia()
                 mensajeUsuario(2)
             }
+        }
+        val bcomprobar:Button=findViewById(R.id.bComprobar)
+        bcomprobar.setOnClickListener{
+            comprobarSecuencia()
+        }
+        val bVerde:Button=findViewById(R.id.bVerde)
+        bVerde.setOnClickListener{
+            secuenciaComprobar+=1
+            Log.i("Estado","PULSADO verde")
+        }
+        val bRojo:Button=findViewById(R.id.bRojo)
+        bRojo.setOnClickListener{
+            secuenciaComprobar+=2
+            Log.i("Estado","PULSADO rojo")
+        }
+        val bAmarillo:Button=findViewById(R.id.bAmarillo)
+        bAmarillo.setOnClickListener{
+            secuenciaComprobar+=3
+            Log.i("Estado","PULSADO amarillo")
+        }
+        val bAzul:Button=findViewById(R.id.bAzul)
+        bAzul.setOnClickListener{
+            secuenciaComprobar+=4
+            Log.i("Estado","PULSADO azul")
         }
     }
 
@@ -49,22 +79,32 @@ class MainActivity : AppCompatActivity() {
         mensajeUsuario(1)
         /*con lo del log voy comprobando */
         Log.i("Estado","Se ejecuta el juego")
-        delay(3000L)
-        Log.i("Estado","Despues de delay")
         //hace secuencia
         for (b in secuencia){
             when{
                 b==1->{val bVerde: Button = findViewById(R.id.bVerde)
                     bVerde.setBackgroundColor(Color.parseColor("#0E5005"))
+                    delay(1000L)
+                    bVerde.setBackgroundColor(Color.parseColor("#179205"))
+                    Log.i("Estado","Verde")
                 }
                 b==2->{val bRojo: Button = findViewById(R.id.bRojo)
                     bRojo.setBackgroundColor(Color.parseColor("#FF0400"))
+                    delay(1000L)
+                    bRojo.setBackgroundColor(Color.parseColor("#C50505"))
+                    Log.i("Estado","ROjo")
                 }
                 b==3->{val bAmarillo: Button = findViewById(R.id.bAmarillo)
-                    bAmarillo.setBackgroundColor(Color.parseColor("#F4FF00"))
+                    bAmarillo.setBackgroundColor(Color.parseColor("#747408"))
+                    delay(1000L)
+                    bAmarillo.setBackgroundColor(Color.parseColor("#FFFE00"))
+                    Log.i("Estado","Amarillo")
                 }
                 b==4->{val bAzul: Button = findViewById(R.id.bAzul)
-                    bAzul.setBackgroundColor(Color.parseColor("#0016FF"))
+                    bAzul.setBackgroundColor(Color.parseColor("#032BFE"))
+                    delay(1000L)
+                    bAzul.setBackgroundColor(Color.parseColor("#03FEED"))
+                    Log.i("Estado","Azul")
                 }
             }
 
@@ -77,18 +117,47 @@ class MainActivity : AppCompatActivity() {
         val mensaje =when{
             key==1->"Ronda en marcha"
             key==2->"Tu turno"
-            else ->""
+            key==3->"Bien"
+            else ->"mal"
         }
         Toast.makeText(this.applicationContext, mensaje, Toast.LENGTH_SHORT).show()
     }
-    private fun comprobarSecuencia():Boolean{
-        Log.i("Estado","Comprobar que la secuencia del jugador coincide")
-        if(contadorRondas!=10){
-          return true
-        }else{
-            //fin del juego
-            contadorRondas=0
-            return false
+    private fun comprobarSecuencia() {
+        Log.i("Estado","Comprobar la secuencia del jugador")
+        for(s in secuencia){
+            if(s==secuenciaComprobar.get(contadorSecuencia)){
+                Log.i("Estado",s.toString()+" "+secuenciaComprobar.get(contadorSecuencia))
+                mensajeUsuario(3)
+                compo=true
+                contadorSecuencia++
+
+            }else{
+                Log.i("Estado","No coincide")
+
+                mensajeUsuario(4)
+                secuenciaComprobar=arrayOf<Int>()
+                compo=false
+            }
         }
+
+        if(compo){
+            Log.i("Estado","siguiente ronda")
+            mostrarRonda()
+            mensajeUsuario(3)
+            contadorSecuencia=0
+            secuenciaComprobar=arrayOf<Int>()
+            compo=false
+        }else{
+            finalizarPartida()
+        }
+    }
+
+    private fun finalizarPartida(){
+        Log.i("Estado","Fin Partida")
+        secuencia= arrayOf<Int>()
+        contadorRondas=0
+        primerMostrar=true
+        val t:TextView=findViewById(R.id.numeroRonda)
+        t.visibility=TextView.INVISIBLE
     }
 }
