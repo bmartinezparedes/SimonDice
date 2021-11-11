@@ -17,7 +17,6 @@ class MainActivity : AppCompatActivity() {
     private var contadorRondas:Int=0
     var secuencia= arrayOf<Int>()
     var secuenciaComprobar=arrayOf<Int>()
-    var primerMostrar=true
     private var contadorSecuencia:Int=0
     var compo=true
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,10 +26,8 @@ class MainActivity : AppCompatActivity() {
         empezarPartida.setOnClickListener {
             //Aqui iria lo que ejecutaria darle empezar a partida
             Log.i("Estado","Boton Jugar pulsado")
-            if(primerMostrar){
-                mostrarRonda()
-                primerMostrar=false
-            }
+            mostrarRonda()
+
             //creo la variable job para despues poder pausar la corrutina o pararla
             GlobalScope.launch(Dispatchers.Main) {
                 //llamo al metodo ejecutar Secuencia para que me ejecute el juego
@@ -88,24 +85,28 @@ class MainActivity : AppCompatActivity() {
                     bVerde.setBackgroundColor(Color.parseColor("#0E5005"))
                     delay(1000L)
                     bVerde.setBackgroundColor(Color.parseColor("#179205"))
+                    delay(1000L)
                     Log.i("Estado","Verde")
                 }
                 b==2->{val bRojo: Button = findViewById(R.id.bRojo)
                     bRojo.setBackgroundColor(Color.parseColor("#FF0400"))
                     delay(1000L)
                     bRojo.setBackgroundColor(Color.parseColor("#C50505"))
+                    delay(1000L)
                     Log.i("Estado","ROjo")
                 }
                 b==3->{val bAmarillo: Button = findViewById(R.id.bAmarillo)
                     bAmarillo.setBackgroundColor(Color.parseColor("#747408"))
                     delay(1000L)
                     bAmarillo.setBackgroundColor(Color.parseColor("#FFFE00"))
+                    delay(1000L)
                     Log.i("Estado","Amarillo")
                 }
                 b==4->{val bAzul: Button = findViewById(R.id.bAzul)
                     bAzul.setBackgroundColor(Color.parseColor("#032BFE"))
                     delay(1000L)
                     bAzul.setBackgroundColor(Color.parseColor("#03FEED"))
+                    delay(1000L)
                     Log.i("Estado","Azul")
                 }
             }
@@ -156,7 +157,6 @@ class MainActivity : AppCompatActivity() {
         secuencia= arrayOf()
         contadorRondas=0
         compo=true
-        primerMostrar=true
         val t:TextView=findViewById(R.id.numeroRonda)
         t.visibility=TextView.INVISIBLE
         val empezarPartida: Button = findViewById(R.id.bJugar)
