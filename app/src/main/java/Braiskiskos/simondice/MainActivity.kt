@@ -149,7 +149,6 @@ class MainActivity : AppCompatActivity() {
             }else{
                 Log.i("Estado","No coincide")
                 mensajeUsuario(4)
-                secuenciaComprobar=arrayOf()
                 compo=false
             }
         }
@@ -171,6 +170,7 @@ class MainActivity : AppCompatActivity() {
     private fun finalizarPartida(){
         Log.i("Estado","Fin Partida")
         secuencia= arrayOf()
+        secuenciaComprobar=arrayOf()
         contadorRondas=0
         compo=true
         val t:TextView=findViewById(R.id.numeroRonda)
