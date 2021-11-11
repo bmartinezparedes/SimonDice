@@ -34,8 +34,10 @@ class MainActivity : AppCompatActivity() {
             //creo la variable job para despues poder pausar la corrutina o pararla
             GlobalScope.launch(Dispatchers.Main) {
                 //llamo al metodo ejecutar Secuencia para que me ejecute el juego
+                empezarPartida.visibility=Button.INVISIBLE
                 ejecutarSecuencia()
                 mensajeUsuario(2)
+
             }
         }
         val bcomprobar:Button=findViewById(R.id.bComprobar)
@@ -127,15 +129,12 @@ class MainActivity : AppCompatActivity() {
         for(s in secuencia){
             if(s==secuenciaComprobar.get(contadorSecuencia)){
                 Log.i("Estado",s.toString()+" "+secuenciaComprobar.get(contadorSecuencia))
-                mensajeUsuario(3)
-                compo=true
                 contadorSecuencia++
 
             }else{
                 Log.i("Estado","No coincide")
-
                 mensajeUsuario(4)
-                secuenciaComprobar=arrayOf<Int>()
+                secuenciaComprobar=arrayOf()
                 compo=false
             }
         }
@@ -145,8 +144,8 @@ class MainActivity : AppCompatActivity() {
             mostrarRonda()
             mensajeUsuario(3)
             contadorSecuencia=0
-            secuenciaComprobar=arrayOf<Int>()
-            compo=false
+            secuenciaComprobar=arrayOf()
+            corrutina()
         }else{
             finalizarPartida()
         }
@@ -154,10 +153,20 @@ class MainActivity : AppCompatActivity() {
 
     private fun finalizarPartida(){
         Log.i("Estado","Fin Partida")
-        secuencia= arrayOf<Int>()
+        secuencia= arrayOf()
         contadorRondas=0
+        compo=true
         primerMostrar=true
         val t:TextView=findViewById(R.id.numeroRonda)
         t.visibility=TextView.INVISIBLE
+        val empezarPartida: Button = findViewById(R.id.bJugar)
+        empezarPartida.visibility=Button.VISIBLE
+    }
+    fun corrutina(){
+        GlobalScope.launch(Dispatchers.Main) {
+            //llamo al metodo ejecutar Secuencia para que me ejecute el juego
+            ejecutarSecuencia()
+            mensajeUsuario(2)
+        }
     }
 }
