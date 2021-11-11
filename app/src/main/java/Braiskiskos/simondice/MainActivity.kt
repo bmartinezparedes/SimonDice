@@ -19,6 +19,7 @@ class MainActivity : AppCompatActivity() {
     var secuenciaComprobar=arrayOf<Int>()
     private var contadorSecuencia:Int=0
     var compo=true
+    var jugador=false
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -34,31 +35,43 @@ class MainActivity : AppCompatActivity() {
                 empezarPartida.visibility=Button.INVISIBLE
                 ejecutarSecuencia()
                 mensajeUsuario(2)
-
+                jugador=true
             }
         }
         val bcomprobar:Button=findViewById(R.id.bComprobar)
         bcomprobar.setOnClickListener{
-            comprobarSecuencia()
+            if(secuencia.size==secuenciaComprobar.size) {
+                comprobarSecuencia()
+            }else{
+                mensajeUsuario(5)
+            }
         }
         val bVerde:Button=findViewById(R.id.bVerde)
         bVerde.setOnClickListener{
-            secuenciaComprobar+=1
+            if(jugador) {
+                secuenciaComprobar += 1
+            }
             Log.i("Estado","PULSADO verde")
         }
         val bRojo:Button=findViewById(R.id.bRojo)
         bRojo.setOnClickListener{
-            secuenciaComprobar+=2
+            if(jugador) {
+                secuenciaComprobar += 2
+            }
             Log.i("Estado","PULSADO rojo")
         }
         val bAmarillo:Button=findViewById(R.id.bAmarillo)
         bAmarillo.setOnClickListener{
-            secuenciaComprobar+=3
+            if(jugador) {
+                secuenciaComprobar += 3
+            }
             Log.i("Estado","PULSADO amarillo")
         }
         val bAzul:Button=findViewById(R.id.bAzul)
         bAzul.setOnClickListener{
-            secuenciaComprobar+=4
+            if(jugador) {
+                secuenciaComprobar += 4
+            }
             Log.i("Estado","PULSADO azul")
         }
     }
@@ -121,6 +134,7 @@ class MainActivity : AppCompatActivity() {
             key==1->"Ronda en marcha"
             key==2->"Tu turno"
             key==3->"Bien"
+            key==5->"Faltan botones en la secuencia"
             else ->"mal"
         }
         Toast.makeText(this.applicationContext, mensaje, Toast.LENGTH_SHORT).show()
@@ -142,12 +156,14 @@ class MainActivity : AppCompatActivity() {
 
         if(compo){
             Log.i("Estado","siguiente ronda")
+            jugador=false
             mostrarRonda()
             mensajeUsuario(3)
             contadorSecuencia=0
             secuenciaComprobar=arrayOf()
             corrutina()
         }else{
+            jugador=false
             finalizarPartida()
         }
     }
@@ -167,6 +183,7 @@ class MainActivity : AppCompatActivity() {
             //llamo al metodo ejecutar Secuencia para que me ejecute el juego
             ejecutarSecuencia()
             mensajeUsuario(2)
+            jugador=true
         }
     }
 }
