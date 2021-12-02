@@ -42,8 +42,10 @@ class MainActivity : AppCompatActivity() {
         bcomprobar.setOnClickListener{
             if(secuencia.size==secuenciaComprobar.size) {
                 comprobarSecuencia()
-            }else{
+            }else if (secuencia.size>secuenciaComprobar.size){
                 mensajeUsuario(5)
+            }else{
+                finalizarPartida()
             }
         }
         val bVerde:Button=findViewById(R.id.bVerde)
