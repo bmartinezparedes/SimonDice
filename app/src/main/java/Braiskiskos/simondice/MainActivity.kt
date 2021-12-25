@@ -54,6 +54,13 @@ class MainActivity : AppCompatActivity() {
                 secuenciaComprobar += 1
             }
             Log.i("Estado","PULSADO verde")
+            if(secuencia.size==secuenciaComprobar.size) {
+                comprobarSecuencia()
+            }else if (secuencia.size>secuenciaComprobar.size){
+                mensajeUsuario(5)
+            }else{
+                finalizarPartida()
+            }
         }
         val bRojo:Button=findViewById(R.id.bRojo)
         bRojo.setOnClickListener{
@@ -61,6 +68,13 @@ class MainActivity : AppCompatActivity() {
                 secuenciaComprobar += 2
             }
             Log.i("Estado","PULSADO rojo")
+            if(secuencia.size==secuenciaComprobar.size) {
+                comprobarSecuencia()
+            }else if (secuencia.size>secuenciaComprobar.size){
+                mensajeUsuario(5)
+            }else{
+                finalizarPartida()
+            }
         }
         val bAmarillo:Button=findViewById(R.id.bAmarillo)
         bAmarillo.setOnClickListener{
@@ -68,6 +82,13 @@ class MainActivity : AppCompatActivity() {
                 secuenciaComprobar += 3
             }
             Log.i("Estado","PULSADO amarillo")
+            if(secuencia.size==secuenciaComprobar.size) {
+                comprobarSecuencia()
+            }else if (secuencia.size>secuenciaComprobar.size){
+                mensajeUsuario(5)
+            }else{
+                finalizarPartida()
+            }
         }
         val bAzul:Button=findViewById(R.id.bAzul)
         bAzul.setOnClickListener{
@@ -75,6 +96,13 @@ class MainActivity : AppCompatActivity() {
                 secuenciaComprobar += 4
             }
             Log.i("Estado","PULSADO azul")
+            if(secuencia.size==secuenciaComprobar.size) {
+                comprobarSecuencia()
+            }else if (secuencia.size>secuenciaComprobar.size){
+                mensajeUsuario(5)
+            }else{
+                finalizarPartida()
+            }
         }
     }
 
