@@ -47,8 +47,6 @@ class MainActivity : AppCompatActivity() {
                 Log.i("Estado", "PULSADO verde")
                 if (secuencia.size == secuenciaComprobar.size) {
                     comprobarSecuencia()
-                } else if (secuencia.size > secuenciaComprobar.size) {
-                    mensajeUsuario(5)
                 } else {
                     finalizarPartida()
                 }
@@ -62,8 +60,6 @@ class MainActivity : AppCompatActivity() {
                 Log.i("Estado", "PULSADO rojo")
                 if (secuencia.size == secuenciaComprobar.size) {
                     comprobarSecuencia()
-                } else if (secuencia.size > secuenciaComprobar.size) {
-                    mensajeUsuario(5)
                 } else {
                     finalizarPartida()
                 }
@@ -77,8 +73,6 @@ class MainActivity : AppCompatActivity() {
                 Log.i("Estado", "PULSADO amarillo")
                 if (secuencia.size == secuenciaComprobar.size) {
                     comprobarSecuencia()
-                } else if (secuencia.size > secuenciaComprobar.size) {
-                    mensajeUsuario(5)
                 } else {
                     finalizarPartida()
                 }
@@ -92,8 +86,6 @@ class MainActivity : AppCompatActivity() {
                 Log.i("Estado", "PULSADO azul")
                 if (secuencia.size == secuenciaComprobar.size) {
                     comprobarSecuencia()
-                } else if (secuencia.size > secuenciaComprobar.size) {
-                    mensajeUsuario(5)
                 } else {
                     finalizarPartida()
                 }
@@ -159,7 +151,6 @@ class MainActivity : AppCompatActivity() {
             key==1->"Ronda en marcha"
             key==2->"Tu turno"
             key==3->"Bien"
-            key==5->"Faltan botones en la secuencia"
             else ->"mal"
         }
         Toast.makeText(this.applicationContext, mensaje, Toast.LENGTH_SHORT).show()
