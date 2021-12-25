@@ -38,16 +38,6 @@ class MainActivity : AppCompatActivity() {
                 jugador=true
             }
         }
-        val bcomprobar:Button=findViewById(R.id.bComprobar)
-        bcomprobar.setOnClickListener{
-            if(secuencia.size==secuenciaComprobar.size) {
-                comprobarSecuencia()
-            }else if (secuencia.size>secuenciaComprobar.size){
-                mensajeUsuario(5)
-            }else{
-                finalizarPartida()
-            }
-        }
         val bVerde:Button=findViewById(R.id.bVerde)
         bVerde.setOnClickListener{
             if(jugador) {
